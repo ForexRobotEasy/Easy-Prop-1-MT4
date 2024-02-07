@@ -1,0 +1,125 @@
+mql5
+//+------------------------------------------------------------------+
+//|                                            Easy Prop 1 MT4       |
+//|                                    Developer: Forex Robot Easy Team |
+//|                                    Website: forexroboteasy.com      |
+//+------------------------------------------------------------------+
+
+// Define risk management parameters
+double riskPercentage = 0.5; // Risk percentage per trade
+double maxRiskPercentage = 1.0; // Maximum risk percentage per trade
+
+// Define trade variables
+double entryPrice;
+double stopLoss;
+double takeProfit;
+double accountBalance;
+double positionSize;
+double maxPositionSize;
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//|                       Risk Management Functions                  |
+//|                                                                  |
+//+------------------------------------------------------------------+
+
+// Function to calculate position size based on risk percentage
+double CalculatePositionSize(double riskPercentage, double accountBalance)
+{
+    return (accountBalance * riskPercentage) / 100;
+}
+
+// Function to adjust position size based on available account balance and risk parameters
+double AdjustPositionSize(double accountBalance, double positionSize, double maxRiskPercentage)
+{
+    double maxPositionSize = (accountBalance * maxRiskPercentage) / 100;
+    
+    if (positionSize > maxPositionSize)
+    {
+        return maxPositionSize;
+    }
+    
+    return positionSize;
+}
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//|                       Trade Execution Functions                   |
+//|                                                                  |
+//+------------------------------------------------------------------+
+
+// Function to execute buy order
+void ExecuteBuyOrder(double entryPrice, double stopLoss, double takeProfit)
+{
+    // Add code to execute buy order
+    // ...
+    // Ensure accurate and timely execution of trades
+    // ...
+}
+
+// Function to execute sell order
+void ExecuteSellOrder(double entryPrice, double stopLoss, double takeProfit)
+{
+    // Add code to execute sell order
+    // ...
+    // Ensure accurate and timely execution of trades
+    // ...
+}
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//|                       Trade Monitoring Functions                  |
+//|                                                                  |
+//+------------------------------------------------------------------+
+
+// Function to monitor open trades
+void MonitorTrades()
+{
+    // Add code to monitor open trades and track their performance
+    // ...
+    // Implement functionality to close trades based on predefined conditions
+    // ...
+}
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//|                            Main Program                           |
+//|                                                                  |
+//+------------------------------------------------------------------+
+
+int OnInit()
+{
+    // Initialize trade variables
+    entryPrice = 0;
+    stopLoss = 0;
+    takeProfit = 0;
+    accountBalance = AccountBalance();
+    
+    // Calculate position size based on risk percentage
+    positionSize = CalculatePositionSize(riskPercentage, accountBalance);
+    
+    // Adjust position size based on available account balance and risk parameters
+    positionSize = AdjustPositionSize(accountBalance, positionSize, maxRiskPercentage);
+    
+    // Execute buy or sell order
+    if (entryPrice > 0)
+    {
+        if (entryPrice > Ask)
+        {
+            ExecuteBuyOrder(entryPrice, stopLoss, takeProfit);
+        }
+        else if (entryPrice < Bid)
+        {
+            ExecuteSellOrder(entryPrice, stopLoss, takeProfit);
+        }
+    }
+    
+    return INIT_SUCCEEDED;
+}
+
+void OnTick()
+{
+    // Monitor open trades and close trades based on predefined conditions
+    MonitorTrades();
+}
+
